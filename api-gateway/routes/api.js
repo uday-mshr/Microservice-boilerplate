@@ -16,13 +16,16 @@ router.all('/:serviceName/:path', (req, res) => {
   console.log(req.params.path);
   if (registry.services[req.params.serviceName]) {
     console.log(registry.services[req.params.serviceName].url + req.params.path);
+    console.log("request", req);
+    const options = {
+      method: req.method,
+      headers: req.headers,
+      data: req.body,
+      url: registry.services[req.params.serviceName].url + req.params.path,
+    };
+
     try {
-      axios({
-        method: req.method,
-        url: registry.services[req.params.serviceName].url + req.params.path,
-        headers: req.headers,
-        data: req.body
-      }).then((response) => {
+      axios(options).then((response) => {
         res.status(200).send(response.data)
       }).catch(err => {
         console.log("err");
