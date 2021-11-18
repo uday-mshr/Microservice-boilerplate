@@ -10,21 +10,26 @@ const registry = require('./registry.json');
 //   res.send("hello world")
 // });
 
-router.all('/:serviceName/:path', function (req, res) {
+router.all('/:serviceName/:path', (req, res) => {
   console.log("User Page Called");
   console.log(req.params.serviceName);
   console.log(req.params.path);
-  if(registry.services[req.params.serviceName]){
-    // axios({
-    //   method: req.method,
-    //   url: registry.services[req.params.serviceName].url + req.params.path,
-    //   headers: req.headers,
-    //   data: req.body
-    // }).then((response) => {
-    //   res.send(response.data)
-    // })
-    res.send("Service exist");
-  } else{
+  if (registry.services[req.params.serviceName]) {
+    console.log(registry.services[req.params.serviceName].url + req.params.path);
+    try {
+      axios({
+        method: req.method,
+        url: registry.services[req.params.serviceName].url + req.params.path,
+        headers: req.headers,
+        data: req.body
+      }).then((response) => {
+        res.status(200).send(response.data)
+      }).catch(err => res.send(err));
+    }
+    catch (err) {
+      console.error("GG", err);
+    }
+  } else {
     res.send("Service Doesn't exist");
   }
 });
