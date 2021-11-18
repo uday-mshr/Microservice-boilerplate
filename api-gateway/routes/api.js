@@ -11,7 +11,7 @@ const registry = require('./registry.json');
 // });
 
 router.all('/:serviceName/:path', (req, res) => {
-  console.log("User Page Called");
+  console.log("router.all");
   console.log(req.params.serviceName);
   console.log(req.params.path);
   if (registry.services[req.params.serviceName]) {
@@ -24,7 +24,11 @@ router.all('/:serviceName/:path', (req, res) => {
         data: req.body
       }).then((response) => {
         res.status(200).send(response.data)
-      }).catch(err => res.send(err));
+      }).catch(err => {
+        console.log("err");
+        console.log(err);
+        res.status(200).send(err)
+      });
     }
     catch (err) {
       console.error("GG", err);
