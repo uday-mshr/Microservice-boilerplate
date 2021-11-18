@@ -27,8 +27,6 @@ router.all('/:serviceName/:path', function (req, res) {
   } else{
     res.send("Service Doesn't exist");
   }
-
-  res.send("hello world")
 });
 
 module.exports = router;
