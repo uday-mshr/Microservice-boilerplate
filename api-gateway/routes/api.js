@@ -15,8 +15,7 @@ router.all('/:serviceName/:path', (req, res) => {
   console.log(req.params.serviceName);
   console.log(req.params.path);
   if (registry.services[req.params.serviceName]) {
-    console.log(registry.services[req.params.serviceName].url + req.params.path);
-    console.log("request", req);
+    console.log("url"+ registry.services[req.params.serviceName].url + req.params.path);
     const options = {
       method: req.method,
       headers: req.headers,
