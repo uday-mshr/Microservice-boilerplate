@@ -11,12 +11,6 @@
             "host":"http://localhost",
             "port":"8070",
             "url":"http://books:3000/"
-        },
-        "search":{
-            "apiName": "search",
-            "host":"http://localhost",
-            "port":"8060",
-            "url":"http://search:3000/"
         }
     }
 }
