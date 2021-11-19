@@ -16,6 +16,7 @@ router.all('/:serviceName/:path', (req, res) => {
   console.log(req.params.path);
   if (registry.services[req.params.serviceName]) {
     console.log("url"+ registry.services[req.params.serviceName].url + req.params.path);
+    req.headers["content-length"] = JSON.stringify(req.body).length;
     const options = {
       method: req.method,
       headers: req.headers,
